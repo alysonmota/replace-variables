@@ -1,0 +1,30 @@
+{
+	"name": "@alyson.mota/replace-variables",
+	"main": "out/index.js",
+	"types": "out/index.d.ts",
+	"description": "Simple library to renaming variables in string",
+	"private": false,
+	"author": "alysonmota",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/main.ts",
+		"build": "rimraf out && esbuild ./src --bundle --minify --outfile=./out/index.js --tsconfig=./tsconfig.json --format=esm --target=node16 && tsc"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.5.3",
+		"@types/node": "^20.11.6",
+		"esbuild": "^0.19.12",
+		"rimraf": "^5.0.5",
+		"tsx": "^4.7.0",
+		"typescript": "^5.3.3"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/alysonmota/replace-variables.git"
+	},
+	"files": ["package.json", "README.md", "out/**/*", "!**/**/*"],
+	"keywords": ["replace-variables", "string-variables"],
+	"homepage": "https://github.com/alysonmota/replace-variables#readme"
+}

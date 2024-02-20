@@ -1,0 +1,19 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"semicolons": "asNeeded"
+		}
+	},
+	"linter": {
+		"rules": {
+			"suspicious": {
+				"noRedeclare": "off"
+			},
+			"style": {
+				"noParameterAssign": "off"
+			}
+		}
+	}
+}
