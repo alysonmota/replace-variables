@@ -6,7 +6,7 @@ So you probrably won´t need to use this.
 But if not, feel free to use and modify this code.
 
 ### Use example
-```replace_variables(str, separator_pattern, values)```
+```replaceVariables(str, separator_pattern, values)```
 
 ```ts
 import { replace_variables, SeparatorPattern } from 'replace-variables'
@@ -18,16 +18,30 @@ const url_with_id = replace_variables(base_url, SeparatorPattern.Bracket, {
 }) // output: https://shop.com/product/my-id/details
 ```
 
-```replace_variable_on_position(str, separator_pattern, variable_position, value)```
+```replaceVariablesWithUsedValues(str, separator_pattern, variable_position, value)```
+
+same replaceVariables but returns values that have been used 
 ```ts
-import { replace_variable_on_position, SeparatorPattern } from 'replace-variables'
+import { replaceVariablesWithUsedValues, SeparatorPattern } from 'replace-variables'
+
+const base_url = 'https://shop.com/product/:id/details'
+
+replaceVariablesWithUsedValues(base_url, SeparatorPattern.Colon, {
+  id: 'my-id'
+})
+// output: [str: https://shop.com/product/my-id?color=red&size=, arr: [my-id]]
+```
+
+```replaceVariableOnPosition(str, separator_pattern, variable_position, value)```
+```ts
+import { replaceVariableOnPosition, SeparatorPattern } from 'replace-variables'
 
 const base_url = 'https://shop.com/product/my-id?color=&size='
 
-replace_variable_on_position(base_url, SeparatorPattern.LikeUrlParameter, 1, 'red')
+replaceVariableOnPosition(base_url, SeparatorPattern.LikeUrlParameter, 1, 'red')
 // output: https://shop.com/product/my-id?color=red&size=
 
-replace_variable_on_position(base_url, SeparatorPattern.LikeUrlParameter, 2, 'large')
+replaceVariableOnPosition(base_url, SeparatorPattern.LikeUrlParameter, 2, 'large')
 // output: https://shop.com/product/my-id?color=&size=large
 ```
 
@@ -36,7 +50,7 @@ Colon ```:my-varaible```
 
 At ```@my-variable```
 
-ParameterUrl ```?my-variable=```
+LikeUrlParameter ```?my-variable=```
 
 Parentheses ```(my-variable)```
 
