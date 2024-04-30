@@ -1,4 +1,4 @@
-import { OnlyBegin, SeparatorPattern } from './constants'
+import { type OnlyBegin, SeparatorPattern } from './constants'
 
 type BreakBeginChars =
 	| '/'
@@ -41,10 +41,10 @@ type ExtractVariableWithOnlyBegin<
 > = InputPart extends `${infer X}${Begin}`
 	? X
 	: InputPart extends `${infer X}${BreakBeginChars}${infer _}`
-	  ? X
-	  : InputPart extends `${infer B}${BreakBeginChars}`
-		  ? B
-		  : never
+		? X
+		: InputPart extends `${infer B}${BreakBeginChars}`
+			? B
+			: never
 
 type VariablesWithOneSeparator<
 	Input extends string,
@@ -52,23 +52,23 @@ type VariablesWithOneSeparator<
 > = Input extends `${Begin}${infer X}${BreakBeginChars}${infer A}`
 	? ExtractVariableWithOnlyBegin<X, Begin> | VariablesWithOneSeparator<A, Begin>
 	: Input extends `${BreakBeginChars}${Begin}${infer Y}`
-	  ? Y
-	  : Input extends `${infer _}${Begin}${infer E}${BreakBeginChars}${infer F}`
-		  ? E extends ''
+		? Y
+		: Input extends `${infer _}${Begin}${infer E}${BreakBeginChars}${infer F}`
+			? E extends ''
 				? VariablesWithOneSeparator<F, Begin>
 				: E extends `${BreakBeginChars}${infer _}`
-				  ? never
-				  : E | VariablesWithOneSeparator<F, Begin>
-		  : Input extends `${infer _}${Begin}${infer T}`
-			  ? T
-			  : never
+					? never
+					: E | VariablesWithOneSeparator<F, Begin>
+			: Input extends `${infer _}${Begin}${infer T}`
+				? T
+				: never
 
 type GetVariablesLikeUrlParameter<Input extends string> =
 	Input extends `${infer X}=&${infer R}`
 		? X | GetVariablesLikeUrlParameter<R>
 		: Input extends `${infer Y}=`
-		  ? Y
-		  : never
+			? Y
+			: never
 
 type Variables<
 	Input extends string,
@@ -78,12 +78,12 @@ type Variables<
 			[v in GetVariablesLikeUrlParameter<
 				Input extends `${infer _}?${infer R}` ? R : never
 			>]: string
-	  }
+		}
 	: {
 			[v in VariablesSeparator extends OnlyBeginChars
 				? VariablesWithOneSeparator<Input, VariablesSeparator>
 				: VariablesWithTwoSeparators<Input, VariablesSeparator>]: string
-	  }
+		}
 
 function isValidSeparator(separator: Separators): boolean {
 	const patterns_values = Object.values(SeparatorPattern)

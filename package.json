@@ -1,11 +1,11 @@
 {
-	"name": "@alyson.mota/replace-variables",
+	"name": "@mota.alyson/replace-variables",
 	"main": "out/index.js",
 	"types": "out/index.d.ts",
 	"description": "Simple library to renaming variables in string",
 	"private": false,
 	"author": "alysonmota",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"type": "module",
 	"scripts": {
 		"dev": "tsx watch src/main.ts",
@@ -22,9 +22,11 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/alysonmota/replace-variables.git"
+		"url": "https://github.com/alysonmota/replace-variables.git"
 	},
-	"files": ["package.json", "README.md", "out/**/*", "!**/**/*"],
+	"publishConfig": {
+		"access": "public"
+	},
 	"keywords": ["replace-variables", "string-variables"],
 	"homepage": "https://github.com/alysonmota/replace-variables#readme"
 }
